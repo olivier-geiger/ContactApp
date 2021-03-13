@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Contact from './Contact'
-import { Consumer } from '../context'
+import {Consumer} from '../../context'
 
 export default class Liste extends Component {
 
@@ -26,6 +26,5 @@ export default class Liste extends Component {
       </Consumer>
     )
   }
-
 
 }
