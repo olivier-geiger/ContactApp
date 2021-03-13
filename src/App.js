@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import React, { Component } from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Header from './composants/Header'
+import Liste from './composants/Liste'
+import AddContact from './composants/AddContact'
+import { Provider } from './context'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
+export default class App extends Component {
+  render() {
+    return (
+      <Provider>
+      <div>
+        <Header />
+        <div className="container">
+          <AddContact />
+          <Liste />
+        </div>
+      </div>
+      </Provider>
+    )
+  }
 }
 
-export default App;
