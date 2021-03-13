@@ -2,37 +2,55 @@ import React, { Component } from 'react'
 
 const Context = React.createContext();
 
-export class Provider extends Component {
-  state = {
-      contacts : [
-        {
-          id: 1,
-          nom: 'Olivier Geiger',
-          email: 'contact@oliviergeiger.com',
-          tel: 'O6 10 84 31 21'
-        },
-        {
-          id: 2,
-          nom: 'Jean Martin',
-          email: 'contact@jeanmartin.com',
-          tel: 'O6 23 45 67 78'
-        },
-        {
-          id: 3,
-          nom: 'Marie dupont',
-          email: 'contact@mariedupond.com',
-          tel: 'O1 23 45 67 89'
-        }
-      ]
+const reducer = (state, action) => {
+
+    switch(action.type) {
+        case 'DELETE_CONTACT' :
+        return {
+            ...state,
+            contacts: state.contacts.filter(contact => 
+                contact.id !== action.payload)
+        };
+        default: 
+        return state;
     }
-    
-  render() {
-      return (
-        <Context.Provider value={this.state}>
-          {this.props.children}
-        </Context.Provider>
-      );
-  }
+
+}
+
+export class Provider extends Component {
+    state = {
+        contacts : [
+            {
+                id: 1,
+                nom : 'John Doe',
+                email : 'john@gmail.com',
+                tel : "555-555-5555"
+            },
+            {
+                id: 2,
+                nom : 'John Doe',
+                email : 'john@gmail.com',
+                tel : "555-555-5555"
+            },
+            {
+                id: 3,
+                nom : 'Hugo Doe',
+                email : 'john@gmail.com',
+                tel : "555-555-5555"
+            }
+        ],
+        dispatch: action => {
+            this.setState(state => reducer(state,action))
+        }
+    }
+
+    render() {
+        return (
+            <Context.Provider value={this.state}>
+            {this.props.children}
+            </Context.Provider>
+        )
+    }
 }
 
 export const Consumer = Context.Consumer;

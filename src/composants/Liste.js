@@ -4,35 +4,28 @@ import { Consumer } from '../context'
 
 export default class Liste extends Component {
 
-  delete = (id) => {
-    const newContacts = this.state.contacts.filter(contact => 
-      contact.id !== id)
-
-      this.setState({
-        contacts: newContacts
-      })
-  }
-  
   render() {
 
     return (
       <Consumer>
-        {value =>{
+        {value => {
           return(
             <React.Fragment>
             {value.contacts.map(contact => (
-              <Contact 
-              key={contact.key}
-              nom={contact.nom}
-              email={contact.email}
-              tel={contact.tel}
-              deleteClick={() => this.delete(contact.id)}
-              />
+                <Contact 
+                key={contact.id}
+                id={contact.id}
+                nom={contact.nom}
+                email={contact.email}
+                tel={contact.tel}
+                />
             ))}
-        </React.Fragment>
+          </React.Fragment>
           )
         }}
       </Consumer>
     )
   }
+
+
 }

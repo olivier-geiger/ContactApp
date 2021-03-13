@@ -1,49 +1,64 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
+import { Consumer } from "../context";
 
 export default class Contact extends Component {
-
   state = {
-    show: true
-  }
+    show: true,
+  };
 
-  showContact = () => {
+  supprimeContact = (id, dispatch) => {
+    dispatch({ type: "DELETE_CONTACT", payload: id });
+  };
+
+  montrerContact = () => {
     this.setState({
-      show: !this.state.show
-    })
-  }
-
-  deleteContact = () => {
-    this.props.deleteClick()
-  }
+      show: !this.state.show,
+    });
+  };
 
   render() {
     return (
-      <div class="row">
-        <div className="col-md-6 m-auto">
-          <div className="card card-body mb-3">
-
-            <h4 className=" text-center">
-              {this.props.nom} <i className="fas fa-sort-down" 
-              onClick={this.showContact}></i>
-
-              <i className="fas fa-times" style={{cursor: 'pointer', float: 'right', color: 'red'}}
-              onClick={this.deleteContact}></i>
-            </h4>
-
-            {this.state.show ? (
-              <ul className="card card-body mb-2">
-                <li className="list-group-item">
-                  Email : {this.props.email}
-                </li>
-                <li className="list-group-item">
-                  Téléphone : {this.props.tel}
-                </li>
-              </ul>
-            ) : null}
-
-          </div>
-        </div>
-      </div>
-    )
+      <Consumer>
+        {(value) => {
+          return (
+            <div className="row">
+              <div className="col-md-6 m-auto">
+                <div className="card card-body mb-3 text-center">
+                  <h4>
+                    {this.props.nom}&nbsp;{" "}
+                    <i
+                      style={{ cursor: "pointer" }}
+                      className="fas fa-sort-down"
+                      onClick={this.montrerContact}
+                    ></i>
+                    <i
+                      className="fas fa-times"
+                      style={{
+                        cursor: "pointer",
+                        float: "right",
+                        color: "red",
+                      }}
+                      onClick={() =>
+                        this.supprimeContact(this.props.id, value.dispatch)
+                      }
+                    ></i>
+                  </h4>
+                  {this.state.show ? (
+                    <ul className="card card-body mb-3">
+                      <li className="list-group-item">
+                        Email : {this.props.email}
+                      </li>
+                      <li className="list-group-item">
+                        Téléphone : {this.props.tel}
+                      </li>
+                    </ul>
+                  ) : null}
+                </div>
+              </div>
+            </div>
+          );
+        }}
+      </Consumer>
+    );
   }
 }
