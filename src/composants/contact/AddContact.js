@@ -4,12 +4,19 @@ import {v1 as uuid}  from 'uuid'
 export default class AddContact extends Component {
 
     state = {
+        show: false,
         nom : '',
         email : '',
         tel : ''
     }
 
     onChange = e => this.setState({ [e.target.name]: e.target.value})
+
+    montrerNewContact = () => {
+      this.setState({
+          show : !this.state.show
+      })
+  }
 
     onSubmit = (dispatch,e) => {
         e.preventDefault()
@@ -36,7 +43,10 @@ export default class AddContact extends Component {
               {value => {
                   return (
                     <div className="card mb-3">
-                    <div className="card-header">Ajouter un Contact</div>
+                    <div className="card-header">Ajouter un Contact<i style={{cursor:         'pointer'}} className="fas fa-sort-down pl-2"
+                      onClick={this.montrerNewContact}
+                      ></i></div>
+                      {this.state.show ? ( 
                     <div className="card-body">
                     
                     <form onSubmit={this.onSubmit.bind(this, value.dispatch)}>
@@ -81,6 +91,7 @@ export default class AddContact extends Component {
                     </form>
                     
                     </div>
+                     ) : null }
                   </div>
                   )
               }}
