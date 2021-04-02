@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import {Consumer} from '../../context'
 import {v1 as uuid}  from 'uuid'
+import { toast } from 'react-toastify'
+
+
 export default class AddContact extends Component {
 
     state = {
@@ -35,7 +38,14 @@ export default class AddContact extends Component {
             email : '',
             tel : ''
         })
+
+        toast.success('Ajout d\'un nouveau contact', {
+            autoClose: 3000,
+        })
+
+        this.props.history.push('/')
     }
+
 
   render() {
       return (

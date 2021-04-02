@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import {Consumer} from '../../context'
+
+import { toast } from 'react-toastify'
+
 export default class Contact extends Component {
 
     state = {
@@ -8,6 +11,10 @@ export default class Contact extends Component {
 
     supprimeContact = (id, dispatch) => {  
       dispatch({type: 'DELETE_CONTACT', payload: id})
+
+      toast.success('Suppression d\'un contact', {
+        autoClose: 3000,
+    })
     }
 
     montrerContact = () => {
