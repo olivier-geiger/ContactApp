@@ -9,6 +9,7 @@ export default function APropos() {
             <p className="lead">* rajout de notifications</p>
             <h2 className="display-6">En cours</h2>
             <p className="lead">- rajouter firebase...</p>
+            <p className="lead">- vérification des inputs...</p>
             <p>version: 1.0.1</p>
         </div>
     )
